@@ -12,7 +12,7 @@
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
         let x = 100;
-        let y = 200;
+        let y = 100;
         canvas.width=640;
         canvas.height= 500;
         let t0;
@@ -26,12 +26,12 @@
             ctx.fillStyle="Blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
             //atualiza posição
-            x= x+ 100*dt;
-            if(x>600)
+            y=100+ 1000*Math.sin(t/100)*dt
+            if(y>400)
             {
-                x=100;
+                y=100;
             }
-            y= 200 + 1000*Math.sin(t/100)*dt
+            x= 200 + 1000*Math.cos(t/100)*dt
             //desenha quadrado;
             ctx.fillStyle="white";
             ctx.fillRect(x,y,30,30);
