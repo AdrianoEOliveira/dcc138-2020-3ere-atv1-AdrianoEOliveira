@@ -11,19 +11,32 @@
     <script>
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
-        let x = 305;
-        let y = 235;
+        let x = 100;
+        let y = 200;
         canvas.width=640;
         canvas.height= 500;
-        desenha();
-        function desenha()
+        let t0;
+        let dt
+        requestAnimationFrame(desenha);
+        function desenha(t)
         {
+            if(t0=== undefined) t0 =t;
+            dt=(t-t0)/1000;
             //desenha fundo;
             ctx.fillStyle="Blue";
-            tx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            //atualiza posição
+            x= x+ 100*dt;
+            if(x>600)
+            {
+                x=100;
+            }
+            y= 200 + 1000*Math.sin(t/100)*dt
             //desenha quadrado;
             ctx.fillStyle="white";
             ctx.fillRect(x,y,30,30);
+            requestAnimationFrame(desenha);
+            t0=t;
         }
     </script>
 </body>
