@@ -7,6 +7,24 @@
 </head>
 <body>
     <h1>Teste 01</h1>
-    
+    <canvas></canvas>
+    <script>
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext("2d");
+        let x = 305;
+        let y = 235;
+        canvas.width=640;
+        canvas.height= 500;
+        desenha();
+        function desenha()
+        {
+            //desenha fundo;
+            ctx.fillStyle="Blue";
+            tx.fillRect(0,0,canvas.width,canvas.height);
+            //desenha quadrado;
+            ctx.fillStyle="white";
+            ctx.fillRect(x,y,30,30);
+        }
+    </script>
 </body>
 </html>
