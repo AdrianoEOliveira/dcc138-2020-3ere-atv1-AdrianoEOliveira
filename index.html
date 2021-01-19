@@ -15,8 +15,10 @@
         canvas.height= 500;
 
         let x = 100;
+        let ax = 0;
         let vx = 0;
         let y = 100;
+        let ay = 0;
         let vy = 0;
         let t0;
         let dt;
@@ -31,8 +33,9 @@
             ctx.fillStyle="Blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
             //atualiza posição
-
+            vx = vx + (ax*dt);
             x = x + vx*dt;
+            vy = vy+ (ay*dt);
             y = y + vy*dt;
 
             //desenha quadrado;
@@ -50,16 +53,16 @@
             switch (e.key) 
             {
                 case "ArrowUp":
-                    vy = -V;
+                    ay = -V;
                     break;
                 case "ArrowDown":
-                    vy = +V;
+                    ay = +V;
                     break;
                 case "ArrowLeft":
-                    vx = -V;
+                    ax = -V;
                     break;
                 case "ArrowRight":
-                    vx = +V;
+                    ax = +V;
                     break;
             
                 default:
@@ -74,15 +77,19 @@
             {
                 case "ArrowUp":
                     vy = 0;
+                    ay = 0;
                     break;
                 case "ArrowDown":
                     vy = 0;
+                    ay = 0;
                     break;
                 case "ArrowLeft":
                     vx = 0;
+                    ax = 0;
                     break;
                 case "ArrowRight":
                     vx = 0;
+                    ax = 0;
                     break;
             
                 default:
