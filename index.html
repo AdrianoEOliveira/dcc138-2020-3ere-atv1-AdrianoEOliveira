@@ -24,6 +24,13 @@
         let dt;
         let V=150;
 
+        let ex = 300;
+        let eax = 0;
+        let evx = 0;
+        let ey = 300;
+        let eay = 0;
+        let evy = 0;
+
         requestAnimationFrame(desenha);
         function desenha(t)
         {
@@ -32,15 +39,29 @@
             //desenha fundo;
             ctx.fillStyle="Blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
-            //atualiza posição
+
+            //Controladores
+            eay = ((y - ey)*0.5) - 0.2*evy;
+            eax = ((x - ex)*0.5) - 0.2*evx;
+            
+            //atualiza dinâmica dos elementos
             vx = vx + (ax*dt);
             x = x + vx*dt;
             vy = vy+ (ay*dt);
             y = y + vy*dt;
 
-            //desenha quadrado;
+            evx = evx + (eax*dt);
+            ex = ex + evx*dt;
+            evy = evy+ (eay*dt);
+            ey = ey + evy*dt;
+
+            //desenha elementos;
             ctx.fillStyle="white";
             ctx.fillRect(x,y,30,30);
+
+            ctx.fillStyle="red";
+            ctx.fillRect(ex,ey,30,30);
+
             requestAnimationFrame(desenha);
             t0=t;
         }
