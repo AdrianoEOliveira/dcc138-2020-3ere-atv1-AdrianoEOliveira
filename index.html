@@ -13,15 +13,19 @@
         let ctx = canvas.getContext("2d");
         canvas.width=640;
         canvas.height= 500;
-
-        let x = 100;
-        let ax = 0;
-        let vx = 0;
-        let y = 100;
-        let ay = 0;
-        let vy = 0;
         let t0;
         let dt;
+
+        let p = {
+
+        x : 100,
+        ax : 0,
+        vx : 0,
+        y : 100,
+        ay : 0,
+        vy : 0,
+        }
+
         let V=150;
 
         let ex = 300;
@@ -41,14 +45,14 @@
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
             //Controladores
-            eay = ((y - ey)*0.5) - 0.2*evy;
-            eax = ((x - ex)*0.5) - 0.2*evx;
+            eay = ((p.y - ey)*0.5) - 0.2*evy;
+            eax = ((p.x - ex)*0.5) - 0.2*evx;
             
             //atualiza dinâmica dos elementos
-            vx = vx + (ax*dt);
-            x = x + vx*dt;
-            vy = vy+ (ay*dt);
-            y = y + vy*dt;
+            p.vx = p.vx + p.(ax*dt);
+            p.x = p.x + p.vx*dt;
+            p.vy = p.vy+ (p.ay*dt);
+            p.y = p.y + p.vy*dt;
 
             evx = evx + (eax*dt);
             ex = ex + evx*dt;
@@ -57,7 +61,7 @@
 
             //desenha elementos;
             ctx.fillStyle="white";
-            ctx.fillRect(x,y,30,30);
+            ctx.fillRect(p.x,p.y,30,30);
 
             ctx.fillStyle="red";
             ctx.fillRect(ex,ey,30,30);
@@ -74,16 +78,16 @@
             switch (e.key) 
             {
                 case "ArrowUp":
-                    ay = -V;
+                    p.ay = -V;
                     break;
                 case "ArrowDown":
-                    ay = +V;
+                    p.ay = +V;
                     break;
                 case "ArrowLeft":
-                    ax = -V;
+                    p.ax = -V;
                     break;
                 case "ArrowRight":
-                    ax = +V;
+                    p.ax = +V;
                     break;
             
                 default:
