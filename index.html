@@ -43,6 +43,7 @@
             ctx.fillRect(this.x,this.y,30,30);
             },
             mover: MoverElemento,
+            controla: perseguir,
         }
 
         requestAnimationFrame(desenha);
@@ -55,8 +56,8 @@
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
             //Controladores
-            e.ay = ((p.y - e.y)*0.5) - 0.2*e.vy;
-            e.ax = ((p.x - e.x)*0.5) - 0.2*e.vx;
+            e.controla(p);
+            //e.controla({x:250,y:250})
             
             //atualiza dinâmica dos elementos
             p.mover();
@@ -83,6 +84,16 @@
         {
             ctx.fillStyle=this.cor;
             ctx.fillRect(this.x,this.y,30,30);
+        }
+        function perseguir(alvo)
+        {
+            this.ay = ((alvo.y - this.y)*0.5) - 0.2*this.vy;
+            this.ax = ((alvo.x - this.x)*0.5) - 0.2*this.vx;
+        }
+        function Fugir(alvo)
+        {
+            this.ay = ((alvo.y - this.y)*-0.5) - 0.2*this.vy;
+            this.ax = ((alvo.x - this.x)*-0.5) - 0.2*this.vx;
         }
 
         addEventListener("keydown",teclaPressionada);
