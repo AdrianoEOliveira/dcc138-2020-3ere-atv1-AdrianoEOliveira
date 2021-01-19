@@ -12,11 +12,13 @@
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
         let x = 100;
+        let vx = 0;
         let y = 100;
+        let vy = 0;
         canvas.width=640;
         canvas.height= 500;
         let t0;
-        let dt
+        let dt;
         requestAnimationFrame(desenha);
         function desenha(t)
         {
@@ -26,17 +28,39 @@
             ctx.fillStyle="Blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
             //atualiza posição
-            y= y+ 10*dt;
-            if(y>400)
-            {
-                y=100;
-            }
-            x= 200 + 1000*Math.cos(t/100)*dt
+
+            x = x + vx*dt;
+            y = y + vy*dt;
+
             //desenha quadrado;
             ctx.fillStyle="white";
             ctx.fillRect(x,y,30,30);
             requestAnimationFrame(desenha);
             t0=t;
+        }
+        addEventListener("keydown",teclaPressionada);
+        function teclaPressionada(e)
+        {
+            //Controle de velocidades
+            console.log(e.key);
+            switch (e.key) 
+            {
+                case "ArrowUp":
+                    vy = -20;
+                    break;
+                case "ArrowDown":
+                    vy = +20;
+                    break;
+                case "ArrowLeft":
+                    vx = -20;
+                    break;
+                case "ArrowRight":
+                    vx = +20;
+                    break;
+            
+                default:
+                    break;
+            }
         }
     </script>
 </body>
