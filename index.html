@@ -24,6 +24,11 @@
             y : 100,
             ay : 0,
             vy : 0,
+            desenhar: function()
+            {
+            ctx.fillStyle="white";
+            ctx.fillRect(this.x,this.y,30,30);
+            },
         }
 
         let e = {
@@ -33,6 +38,11 @@
             y : 300,
             ay : 0,
             vy : 0,
+            desenhar: function()
+            {
+            ctx.fillStyle="red";
+            ctx.fillRect(this.x,this.y,30,30);
+            },
         }
 
         requestAnimationFrame(desenha);
@@ -41,7 +51,7 @@
             if(t0=== undefined) t0 =t;
             dt=(t-t0)/1000;
             //desenha fundo;
-            ctx.fillStyle="Blue";
+            ctx.fillStyle="blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
             //Controladores
@@ -49,7 +59,7 @@
             e.ax = ((p.x - e.x)*0.5) - 0.2*e.vx;
             
             //atualiza dinâmica dos elementos
-            p.vx = p.vx + p.(ax*dt);
+            p.vx = p.vx + (p.ax*dt);
             p.x = p.x + p.vx*dt;
             p.vy = p.vy+ (p.ay*dt);
             p.y = p.y + p.vy*dt;
@@ -60,11 +70,9 @@
             e.y = e.y + e.vy*dt;
 
             //desenha elementos;
-            ctx.fillStyle="white";
-            ctx.fillRect(p.x,p.y,30,30);
+            p.desenhar();
 
-            ctx.fillStyle="red";
-            ctx.fillRect(e.x,e.y,30,30);
+            e.desenhar();
 
             requestAnimationFrame(desenha);
             t0=t;
