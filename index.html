@@ -11,14 +11,17 @@
     <script>
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
+        canvas.width=640;
+        canvas.height= 500;
+
         let x = 100;
         let vx = 0;
         let y = 100;
         let vy = 0;
-        canvas.width=640;
-        canvas.height= 500;
         let t0;
         let dt;
+        let V=150;
+
         requestAnimationFrame(desenha);
         function desenha(t)
         {
@@ -39,6 +42,7 @@
             t0=t;
         }
         addEventListener("keydown",teclaPressionada);
+        addEventListener("keyup",teclaSolta);
         function teclaPressionada(e)
         {
             //Controle de velocidades
@@ -46,16 +50,39 @@
             switch (e.key) 
             {
                 case "ArrowUp":
-                    vy = -20;
+                    vy = -V;
                     break;
                 case "ArrowDown":
-                    vy = +20;
+                    vy = +V;
                     break;
                 case "ArrowLeft":
-                    vx = -20;
+                    vx = -V;
                     break;
                 case "ArrowRight":
-                    vx = +20;
+                    vx = +V;
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        function teclaSolta(e)
+        {
+            //Controle de velocidades
+            console.log(e.key);
+            switch (e.key) 
+            {
+                case "ArrowUp":
+                    vy = 0;
+                    break;
+                case "ArrowDown":
+                    vy = 0;
+                    break;
+                case "ArrowLeft":
+                    vx = 0;
+                    break;
+                case "ArrowRight":
+                    vx = 0;
                     break;
             
                 default:
