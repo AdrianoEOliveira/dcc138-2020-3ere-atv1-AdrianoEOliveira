@@ -28,23 +28,23 @@
             desenhar: desenharElemento,
             mover: MoverElemento,
         }
-
-        let e = {
-            x: 300,
-            ax: 0,
-            vx: 0,
-            y : 300,
-            ay : 0,
-            vy : 0,
-            cor: "red",
-            desenhar: function()
-            {
-            ctx.fillStyle="red";
-            ctx.fillRect(this.x,this.y,30,30);
-            },
-            mover: MoverElemento,
-            controla: perseguir,
-        }
+        const sprites = [];
+        for (let ne = 0; ne < 10;ne++)
+        {
+            let e = {
+                x: canvas.width * Math.random(),
+                ax: 0,
+                vx: 0,
+                y : canvas.height * Math.random(),
+                ay : 0,
+                vy : 0,
+                cor: "red",
+                desenhar: desenharElemento,
+                mover: MoverElemento,
+                controla: perseguir,
+            }
+            sprites.push(e);
+        }   
 
         requestAnimationFrame(desenha);
         function desenha(t)
@@ -55,19 +55,20 @@
             ctx.fillStyle="blue";
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
-            //Controladores
-            e.controla(p);
-            //e.controla({x:250,y:250})
-            
-            //atualiza dinâmica dos elementos
             p.mover();
-
-            e.mover();
-
-            //desenha elementos;
             p.desenhar();
-
-            e.desenhar();
+            for (let i = 0; i < sprites.length; i++) 
+            {
+                const sprite = sprites[i];
+                
+                //Controladores
+                sprite.controla(p);
+                //sprite.controla({x:250,y:250})          
+                //atualiza dinâmica dos elementos
+                sprite.mover();
+                //desenha elementos;
+                sprite.desenhar();
+            }
 
             requestAnimationFrame(desenha);
             t0=t;
