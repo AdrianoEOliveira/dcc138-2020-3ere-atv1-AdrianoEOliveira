@@ -44,7 +44,27 @@
                 controla: perseguir,
             }
             sprites.push(e);
-        }   
+        }
+        let o= {
+            x : -1000,
+            ax : 0,
+            vx : 0,
+            y : 300,
+            ay : 0,
+            vy : 0,
+            cor:"yellow",
+            desenhar: desenharElemento,
+            mover: MoverElemento,
+            controlar: function(){
+                if(this.x> canvas.width+50)
+                {
+                    this.x=-1000;
+                    this.ax=0;
+                    this.vx=0;
+                }
+            },
+        }
+        sprites.push(o);
 
         requestAnimationFrame(desenha);
         function desenha(t)
@@ -62,7 +82,7 @@
                 const sprite = sprites[i];
                 
                 //Controladores
-                sprite.controla(p);
+                sprite.controla?.(p);
                 //sprite.controla({x:250,y:250})          
                 //atualiza dinâmica dos elementos
                 sprite.mover();
@@ -144,7 +164,15 @@
                     p.vx = 0;
                     p.ax = 0;
                     break;
-            
+                case " ":
+                    if(o.x===-1000)
+                    {
+                        o.x=p.x;
+                        o.y=p.y;
+                        o.vx=0;
+                        o.ax=100;
+                    }
+                    break;
                 default:
                     break;
             }
