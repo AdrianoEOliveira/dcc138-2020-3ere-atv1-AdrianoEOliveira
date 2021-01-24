@@ -16,6 +16,7 @@
         let t0;
         let dt;
         let V=150;
+        let pontos=0;
 
         let p = {
             x : 100,
@@ -49,13 +50,13 @@
             x : -1000,
             ax : 0,
             vx : 0,
-            y : 300,
+            y : -1000000000,
             ay : 0,
             vy : 0,
             cor:"yellow",
             desenhar: desenharElemento,
             mover: MoverElemento,
-            controlar: function(){
+            controla: function(){
                 if(this.x> canvas.width+50)
                 {
                     this.x=-1000;
@@ -88,7 +89,29 @@
                 sprite.mover();
                 //desenha elementos;
                 sprite.desenhar();
+
+                if(colidiram(o,sprite)&&(o!==sprite))
+                {
+                    o.x=-1000;
+                    o.y=-10000000000;
+                    o.ax=0;
+                    o.vx=0;
+                    sprite.x=-1000;
+                    sprite.ax=0;
+                    sprite.vx=100;
+                    pontos= pontos+10;
+                }
+                if(colidiram(p,sprite)&&(o!==sprite))
+                {
+                    sprite.x=-1000;
+                    sprite.ax=0;
+                    sprite.vx=100;
+                    pontos= pontos-2;
+                }
             }
+            ctx.fillStyle="green";
+            ctx.font ="20px Impact"
+            ctx.fillText(pontos,20,20);
 
             requestAnimationFrame(desenha);
             t0=t;
@@ -149,19 +172,15 @@
             switch (event.key) 
             {
                 case "ArrowUp":
-                    p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowDown":
-                    p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowLeft":
-                    p.vx = 0;
                     p.ax = 0;
                     break;
                 case "ArrowRight":
-                    p.vx = 0;
                     p.ax = 0;
                     break;
                 case " ":
@@ -169,13 +188,19 @@
                     {
                         o.x=p.x;
                         o.y=p.y;
-                        o.vx=0;
+                        o.vx=200;
                         o.ax=100;
                     }
                     break;
                 default:
                     break;
             }
+        }
+        function colidiram(A,B)
+        {
+            return!((A.x>B.x+20)||(A.x+20<B.x)||
+            (A.y>B.y+20)||(A.y+20<B.y))
+        
         }
     </script>
 </body>
